@@ -6,7 +6,6 @@ const tax = (tax, price) => {
   
     return price + (tax * price);
   };
-  
   //Returns error or price indluding discount
   const discount = (dis, price) => {
     if (!_.isNumber(price)) return (new Error("Price must be numeric"));
