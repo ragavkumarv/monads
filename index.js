@@ -38,12 +38,15 @@ const tax = tax => price =>
     console.log('Total Price: ' + result);
   }
 
-  const log = x => console.log('Error',x)
+  const log = type => msg => console.log( type, msg )
+  const err = log('Error: ');
+
+
   const showTotalPrice = (item) =>
     getItemPrice(item)
     .chain(gst)
     .chain(diwali)
-    .fold(log,console.log)
+    .fold(err,log('Total Price: '))
     
 
   let tShirt = { name: 't-shirt', price: 11 };
@@ -51,5 +54,5 @@ const tax = tax => price =>
   let chips = { name: 't-shirt', price: 5 }; //less than 10 dollars error
   
   showTotalPrice(tShirt) // Total Is: 9.075
-//   showTotalPrice(pant)   // Error: Price must be numeric
-//   showTotalPrice(chips)  //Error: discount cant be applied for items priced below 10
+  showTotalPrice(pant)   // Error: Price must be numeric
+  showTotalPrice(chips)  //Error: discount cant be applied for items priced below 10
