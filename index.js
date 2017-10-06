@@ -1,43 +1,32 @@
 const Result =  require('folktale/result')
 const _ = require('lodash/fp');
 const {Ok,Error} = Result;
-console.log(Result)
+const {cond,T,lt,gt,always} = require('ramda')
 
 const tax = tax => price => 
     (!_.isNumber(price)) ? Error("Price must be numeric") : Ok(price + (tax * price));
   
   //Returns error or price indluding discount
-  const discount = dis => price => {
+  const discount1 = dis => price => {
     if (!_.isNumber(price)) return Error("Price must be numeric");
   
     if (price < 10) return Error("discount cant be applied for items priced below 10");
   
     return Ok(price - (price * dis));
   };
+
+  const discount = dis => price =>
+    cond([
+        [x => !_.isNumber(x), () => Error("Price must be numeric")],
+        [gt(10), () => Error("discount cant be applied for items priced below 10")],
+        [T, () => Ok(price - (price * dis))],
+    ])(price)
+
   
   const gst = tax(.10);
-  const diwali = discount(.25);
-
-  const isError = (e) => e && e.name == 'Error';
-  
-  const getItemPrice = (item) => Ok(item.price);
-  
-  //shows total price after tax and discount. Need to handle multiple errors.
-  const showTotalPrice1 = (item, taxPerc, disount) => {
-    let price = getItemPrice(item);
+  const diwaliDisc = discount(.25);
  
-    let result = tax(taxPerc, price);
-    if (isError(result)) {
-      return console.log('Error: ' + result.message);
-    }
-    result = discount(discount, result);
-    if (isError(result)) {
-      return console.log('Error: ' + result.message);
-    }
-    //display result
-    console.log('Total Price: ' + result);
-  }
-
+  const getItemPrice = (item) => Ok(item.price);
   const log = type => msg => console.log( type, msg )
   const err = log('Error: ');
 
@@ -45,7 +34,7 @@ const tax = tax => price =>
   const showTotalPrice = (item) =>
     getItemPrice(item)
     .chain(gst)
-    .chain(diwali)
+    .chain(diwaliDisc)
     .fold(err,log('Total Price: '))
     
 
