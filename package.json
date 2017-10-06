@@ -1,0 +1,19 @@
+{
+  "name": "monads",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "folktale": "^2.0.1",
+    "lodash": "^4.17.4",
+    "ramda": "^0.24.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
