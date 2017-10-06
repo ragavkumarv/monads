@@ -1,23 +1,22 @@
 const Result =  require('folktale/result')
 const _ = require('lodash/fp');
+const {Ok,Error} = Result;
 
-const tax = (tax, price) => {
-    if (!_.isNumber(price)) return new Error("Price must be numeric");
+const tax = (tax, price) => 
+    (!_.isNumber(price)) ? Error("Price must be numeric") : Ok(price + (tax * price));
   
-    return price + (tax * price);
-  };
   //Returns error or price indluding discount
   const discount = (dis, price) => {
-    if (!_.isNumber(price)) return (new Error("Price must be numeric"));
+    if (!_.isNumber(price)) return Error("Price must be numeric");
   
-    if (price < 10) return new Error("discount cant be applied for items priced below 10");
+    if (price < 10) return Error("discount cant be applied for items priced below 10");
   
-    return price - (price * dis);
+    return Ok(price - (price * dis));
   };
   
   const isError = (e) => e && e.name == 'Error';
   
-  const getItemPrice = (item) => item.price;
+  const getItemPrice = (item) => Ok(item.price);
   
   //shows total price after tax and discount. Need to handle multiple errors.
   const showTotalPrice = (item, taxPerc, disount) => {
