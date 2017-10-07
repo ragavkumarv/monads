@@ -1,6 +1,7 @@
 const R = require('ramda');
+/*======== Helpher Function ========*/
 const log = console.log;
-
+const get = x => obj => obj[x]; 
 
 /*======== Sample Data ========*/
 const profiles = [
@@ -83,14 +84,19 @@ const doubleMax = R.compose(max,double)
 
 log(doubleMax([-1,200,-3]))
 
-/*======== Challenge 3 ========*/
-// Write a function to double and find the max using R.compose
 
 /*======== Challenge 4 ========*/
 // Write a names function to get all names of friend from the profiles puts it in array 
 // Hint: use get Helper function and R.compose
-
-
+const names = R.map(R.compose(
+                 get('name')
+                ,get('friend')
+            ))
+log(names(profiles))
 /*======== Challenge 5 ========*/
 // Write a isFriend function returns boolean given profiles 
 // Use above names function and R.contains
+
+const isFriend = name => R.compose(R.contains(name),names)
+
+log(isFriend('Cherry Stanley')(profiles))
