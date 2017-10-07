@@ -1,6 +1,55 @@
 const R = require('ramda');
 const log = console.log;
 
+
+/*======== Sample Data ========*/
+const profiles = [
+    {
+      "name": "Gilmore Valentine",
+      "age": 22,
+      "gender": "male",
+      "friend": {
+        "id": 0,
+        "name": "Kirsten Chandler"
+      }
+    },
+    {
+      "name": "Carey Dalton",
+      "age": 32,
+      "gender": "female",
+      "friend": {
+        "id": 1,
+        "name": "Elena Carpenter"
+      }
+    },
+    {
+      "name": "Harmon Hines",
+      "age": 21,
+      "gender": "male",
+      "friend": {
+        "id": 2,
+        "name": "Cherry Stanley"
+      }
+    },
+    {
+      "name": "Aurora Mckee",
+      "age": 24,
+      "gender": "female",
+      "friend": {
+        "id": 3,
+        "name": "Nikki Harvey"
+      }
+    },
+    {
+      "name": "Small Rodriguez",
+      "age": 21,
+      "gender": "male",
+      "friend": {
+        "id": 4,
+        "name": "Gretchen Williamson"
+      }
+    }
+  ]
 const add = x => y => log(x + y);
 
 log(add(1))
