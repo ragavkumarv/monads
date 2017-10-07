@@ -33,3 +33,15 @@ log(max([-1,-1000,-3]))
 const doubleMax = R.compose(max,double)
 
 log(doubleMax([-1,200,-3]))
+
+/*======== Challenge 3 ========*/
+// Write a function to double and find the max using R.compose
+
+/*======== Challenge 4 ========*/
+// Write a names function to get all names of friend from the profiles puts it in array 
+// Hint: use get Helper function and R.compose
+
+
+/*======== Challenge 5 ========*/
+// Write a isFriend function returns boolean given profiles 
+// Use above names function and R.contains
